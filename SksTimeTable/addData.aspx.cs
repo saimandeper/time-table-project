@@ -13,11 +13,10 @@ namespace SksTimeTable
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //if (Session["username"] == null)
-            //{
-            //    Response.Redirect("default.aspx");
-            //}
-            // ScriptManager1.RegisterAsyncPostBackControl(listClass);
+            if (Session["username"] == null)
+            {
+                Response.Redirect("default.aspx");
+            }
             if (!IsPostBack)
             {
                 DataTable dddt = DataAccessLayer.fetchClass();
@@ -49,7 +48,13 @@ namespace SksTimeTable
 
         protected void listClass_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lblAddTimeTableHeader.Text = listClass.SelectedItem.Text;
+            if (listClass.SelectedIndex != 0)
+            {
+                lblAddTimeTableHeader.Text = listClass.SelectedItem.Text;
+            }
+            else {
+                lblAddTimeTableHeader.Text = "";
+            }
         }
     }
 }
